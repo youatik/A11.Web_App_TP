@@ -39,7 +39,7 @@ public void init() throws ServletException {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try (Connection connection = dataSource.getConnection()) {
-            String message = "Connection successful!";
+            String message = dataSource.toString();
             request.setAttribute("message", message);
         } catch (SQLException e) {
             String errorMessage = "Connection failed! " + e.getMessage();
