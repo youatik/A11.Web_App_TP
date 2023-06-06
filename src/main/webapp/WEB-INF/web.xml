@@ -8,6 +8,19 @@
         <servlet-name>TestClientServlet</servlet-name>
         <servlet-class>servlets.TestClientServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApplicationInitializer</servlet-name>
+        <servlet-class>servlets.ApplicationInitializer</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>TestConnectionServlet2</servlet-name>
+        <servlet-class>servlets.TestConnectionServlet2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestClientServlet2</servlet-name>
+        <servlet-class>servlets.TestClientServlet2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
         <url-pattern>/TestConnectionServlet</url-pattern>
@@ -15,6 +28,14 @@
     <servlet-mapping>
         <servlet-name>TestClientServlet</servlet-name>
         <url-pattern>/TestClientServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestConnectionServlet2</servlet-name>
+        <url-pattern>/TestConnectionServlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestClientServlet2</servlet-name>
+        <url-pattern>/TestClientServlet2</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
