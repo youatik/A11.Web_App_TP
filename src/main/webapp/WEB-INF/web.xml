@@ -21,6 +21,10 @@
         <servlet-name>TestClientServlet2</servlet-name>
         <servlet-class>servlets.TestClientServlet2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestClientServlet3</servlet-name>
+        <servlet-class>servlets.TestClientServlet3</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
         <url-pattern>/TestConnectionServlet</url-pattern>
@@ -36,6 +40,10 @@
     <servlet-mapping>
         <servlet-name>TestClientServlet2</servlet-name>
         <url-pattern>/TestClientServlet2</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestClientServlet3</servlet-name>
+        <url-pattern>/TestClientServlet3</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
