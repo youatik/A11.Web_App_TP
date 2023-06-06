@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import models.*;
+
 public class TestClientDAO {
     private DataSource dataSource;
 
@@ -17,24 +19,25 @@ public class TestClientDAO {
         this.dataSource = dataSource;
     }
 
-    public String getFirstClient() {
+    public Client getFirstClient() {
+        Client client = null;
+
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM Test_Projet.client LIMIT 1");
              ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
+                int clientId = resultSet.getInt("clientId");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
 
-                return "First Client: " + firstName + " " + lastName +
-                        "\nEmail: " + email +
-                        "\nAddress: " + address;
+                client = new Client(clientId, firstName, lastName, email, address);
             }
         } catch (SQLException e) {
-            // Handle the exception
+            e.printStackTrace();
         }
 
-        return "No clients found.";
+        return client;
     }
 }
