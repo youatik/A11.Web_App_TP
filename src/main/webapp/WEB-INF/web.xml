@@ -33,6 +33,10 @@
         <servlet-name>TestClientServletGetAll</servlet-name>
         <servlet-class>servlets.TestClientServletGetAll</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LibrarySearchServlet</servlet-name>
+        <servlet-class>servlets.LibrarySearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
         <url-pattern>/TestConnectionServlet</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>TestClientServletGetAll</servlet-name>
         <url-pattern>/TestClientServletGetAll</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibrarySearchServlet</servlet-name>
+        <url-pattern>/LibrarySearchServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
