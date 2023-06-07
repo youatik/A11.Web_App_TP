@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package servlets.testclient;
+package servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,24 +12,23 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
-import data.TestClientDAO;
-import data.TomcatDataSource;
+import data.*;
 import models.Client;
 
 public class TestClientServletGetAll extends HttpServlet {
-    private TestClientDAO testClientDAO;
+    private ClientDAOImplementation clientDAOImplementation;
 
     @Override
     public void init() throws ServletException {
         DataSource dataSource = TomcatDataSource.getDataSource();
-        testClientDAO = new TestClientDAO(dataSource);
+        clientDAOImplementation = new ClientDAOImplementation(dataSource);
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Client> clients = testClientDAO.getAllClients();
+        List<Client> clients = clientDAOImplementation.getAllClients();
 
         request.setAttribute("clients", clients);
-        request.getRequestDispatcher("/showAllClients.jsp").forward(request, response);
+        request.getRequestDispatcher("TestClientResultGetAll.jsp").forward(request, response);
     }
 
     @Override

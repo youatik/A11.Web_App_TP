@@ -31,7 +31,7 @@
     </servlet>
     <servlet>
         <servlet-name>TestClientServletGetAll</servlet-name>
-        <servlet-class>servlets.testclient.TestClientServletGetAll</servlet-class>
+        <servlet-class>servlets.TestClientServletGetAll</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
