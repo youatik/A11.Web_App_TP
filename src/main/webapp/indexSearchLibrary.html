@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Search</title>
+</head>
+<body>
+    <h1>Library Search</h1>
+
+    <form action="LibrarySearchServlet" method="GET">
+        <label for="searchType">Search by:</label>
+        <select name="searchType" id="searchType">
+            <option value="id">ID</option>
+            <option value="title">Title</option>
+            <option value="creator">Creator</option>
+            <option value="description">Description</option>
+        </select>
+        <br><br>
+        <label for="searchTerm">Search term:</label>
+        <input type="text" name="searchTerm" id="searchTerm">
+        <br><br>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>
