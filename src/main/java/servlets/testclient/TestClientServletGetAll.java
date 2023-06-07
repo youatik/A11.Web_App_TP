@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package servlets;
+package servlets.testclient;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.List;
 
 import data.TestClientDAO;
 import data.TomcatDataSource;
-import models.*;
+import models.Client;
 
-public class TestClientServlet3 extends HttpServlet {
+public class TestClientServletGetAll extends HttpServlet {
     private TestClientDAO testClientDAO;
 
     @Override
@@ -24,11 +25,20 @@ public class TestClientServlet3 extends HttpServlet {
         testClientDAO = new TestClientDAO(dataSource);
     }
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Client> clients = testClientDAO.getAllClients();
+
+        request.setAttribute("clients", clients);
+        request.getRequestDispatcher("/showAllClients.jsp").forward(request, response);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Client client = testClientDAO.getFirstClient();
+        processRequest(request, response);
+    }
 
-        request.setAttribute("client", client);
-        request.getRequestDispatcher("/resultTestClient3.jsp").forward(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
     }
 }

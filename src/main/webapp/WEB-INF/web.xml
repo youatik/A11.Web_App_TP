@@ -25,6 +25,14 @@
         <servlet-name>TestClientServlet3</servlet-name>
         <servlet-class>servlets.TestClientServlet3</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestClientServlet4</servlet-name>
+        <servlet-class>servlets.TestClientServlet4</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TestClientServletGetAll</servlet-name>
+        <servlet-class>servlets.testclient.TestClientServletGetAll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
         <url-pattern>/TestConnectionServlet</url-pattern>
@@ -44,6 +52,14 @@
     <servlet-mapping>
         <servlet-name>TestClientServlet3</servlet-name>
         <url-pattern>/TestClientServlet3</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestClientServlet4</servlet-name>
+        <url-pattern>/TestClientServlet4</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestClientServletGetAll</servlet-name>
+        <url-pattern>/TestClientServletGetAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

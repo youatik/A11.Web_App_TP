@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-import data.TestClientDAO;
-import data.TomcatDataSource;
+import data.*;
 import models.*;
 
-public class TestClientServlet3 extends HttpServlet {
-    private TestClientDAO testClientDAO;
+public class TestClientServlet4 extends HttpServlet {
+    private ClientDAOImplementation clientDAOImplementation;
 
     @Override
     public void init() throws ServletException {
         DataSource dataSource = TomcatDataSource.getDataSource();
-        testClientDAO = new TestClientDAO(dataSource);
+        clientDAOImplementation = new ClientDAOImplementation(dataSource);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Client client = testClientDAO.getFirstClient();
+        Client client = clientDAOImplementation.getClientById(1);
 
         request.setAttribute("client", client);
         request.getRequestDispatcher("/resultTestClient3.jsp").forward(request, response);
