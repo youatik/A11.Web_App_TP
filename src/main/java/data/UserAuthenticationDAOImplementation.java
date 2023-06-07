@@ -26,6 +26,28 @@ public class UserAuthenticationDAOImplementation implements UserAuthenticationDA
         this.dataSource = dataSource;
     }
 
+    
+       public UserAuthentication getUserAuthenticationByCredentials(String username, String password) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM Test_Projet.userAuthentication WHERE username = ? AND password = ?")) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return createUserAuthenticationFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // Return null if credentials are not valid or an error occurs
+    }
+    
+    
+    
     @Override
     public void addUserAuthentication(UserAuthentication userAuthentication) {
         try (Connection connection = dataSource.getConnection();
