@@ -4,6 +4,7 @@
  */
 package data;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -173,6 +174,8 @@ public class LibraryDAOImplementation implements LibraryDAOInterface {
         return libraries;
     }
 
+    
+    //put this at the very end
     private Library createLibraryFromResultSet(ResultSet resultSet) throws SQLException {
         long eanIsbn13 = resultSet.getLong("ean_isbn13");
         String title = resultSet.getString("title");
@@ -187,4 +190,116 @@ public class LibraryDAOImplementation implements LibraryDAOInterface {
 
         return new Library(eanIsbn13, title, creators, firstName, lastName, description, publisher, publishDate, price, length);
     }
+    
+    
+    
+    
+      public List<Library> searchLibraries(String searchTerm, String searchType, String[] priceFilters, String[] pagesFilters, String[] editorFilters) {
+        List<Library> libraries = new ArrayList<>();
+
+        try (Connection connection = dataSource.getConnection()) {
+            StringBuilder queryBuilder = new StringBuilder("SELECT * FROM Test_Projet.library WHERE ");
+            List<Object> params = new ArrayList<>();
+
+            if (searchType.equals("creator")) {
+                queryBuilder.append("creators LIKE ?");
+                params.add("%" + searchTerm + "%");
+            } else if (searchType.equals("title")) {
+                queryBuilder.append("title LIKE ?");
+                params.add("%" + searchTerm + "%");
+            } else if (searchType.equals("description")) {
+                queryBuilder.append("description LIKE ?");
+                params.add("%" + searchTerm + "%");
+            }
+
+            if (priceFilters != null && priceFilters.length > 0) {
+                queryBuilder.append(" AND (");
+                for (int i = 0; i < priceFilters.length; i++) {
+                    if (i > 0) {
+                        queryBuilder.append(" OR ");
+                    }
+                    if (priceFilters[i].equals("below40")) {
+                        queryBuilder.append("price < ?");
+                        params.add(new BigDecimal("40"));
+                    } else if (priceFilters[i].equals("40to80")) {
+                        queryBuilder.append("price >= ? AND price <= ?");
+                        params.add(new BigDecimal("40"));
+                        params.add(new BigDecimal("80"));
+                    } else if (priceFilters[i].equals("above80")) {
+                        queryBuilder.append("price > ?");
+                        params.add(new BigDecimal("80"));
+                    }
+                }
+                queryBuilder.append(")");
+            }
+
+            if (pagesFilters != null && pagesFilters.length > 0) {
+                queryBuilder.append(" AND (");
+                for (int i = 0; i < pagesFilters.length; i++) {
+                    if (i > 0) {
+                        queryBuilder.append(" OR ");
+                    }
+                    if (pagesFilters[i].equals("below400")) {
+                        queryBuilder.append("length < ?");
+                        params.add(400);
+                    } else if (pagesFilters[i].equals("400to800")) {
+                        queryBuilder.append("length >= ? AND length <= ?");
+                        params.add(400);
+                        params.add(800);
+                    } else if (pagesFilters[i].equals("above800")) {
+                        queryBuilder.append("length > ?");
+                        params.add(800);
+                    }
+                }
+                queryBuilder.append(")");
+            }
+
+            if (editorFilters != null && editorFilters.length > 0) {
+                queryBuilder.append(" AND (");
+                for (int i = 0; i < editorFilters.length; i++) {
+                    if (i > 0) {
+                        queryBuilder.append(" OR ");
+                    }
+                    if (editorFilters[i].equals("pearson")) {
+                        queryBuilder.append("publisher = ?");
+                        params.add("Pearson");
+                    } else if (editorFilters[i].equals("prenticehall")) {
+                        queryBuilder.append("publisher = ?");
+                        params.add("Prentice Hall");
+                    } else if (editorFilters[i].equals("oreilly")) {
+                        queryBuilder.append("publisher = ?");
+                        params.add("O'Reilly Media");
+                    } else if (editorFilters[i].equals("addisonwesley")) {
+                        queryBuilder.append("publisher = ?");
+                        params.add("Addison-Wesley Professional");
+                    }
+                }
+                queryBuilder.append(")");
+            }
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(queryBuilder.toString())) {
+                for (int i = 0; i < params.size(); i++) {
+                    Object param = params.get(i);
+                    if (param instanceof String) {
+                        preparedStatement.setString(i + 1, (String) param);
+                    } else if (param instanceof BigDecimal) {
+                        preparedStatement.setBigDecimal(i + 1, (BigDecimal) param);
+                    } else if (param instanceof Integer) {
+                        preparedStatement.setInt(i + 1, (Integer) param);
+                    }
+                }
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        libraries.add(createLibraryFromResultSet(resultSet));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return libraries;
+    }
+    
 }

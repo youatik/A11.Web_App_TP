@@ -34,16 +34,24 @@
         <servlet-class>servlets.TestClientServletGetAll</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LibrarySearchServlet</servlet-name>
-        <servlet-class>servlets.LibrarySearchServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlets.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LibrarySearchServlet</servlet-name>
+        <servlet-class>servlets.LibrarySearchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LibrarySearchServletTermType</servlet-name>
+        <servlet-class>servlets.LibrarySearchServletTermType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LibrarySearchServletTermTypeFilter</servlet-name>
+        <servlet-class>servlets.LibrarySearchServletTermTypeFilter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TestConnectionServlet</servlet-name>
@@ -74,16 +82,24 @@
         <url-pattern>/TestClientServletGetAll</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LibrarySearchServlet</servlet-name>
-        <url-pattern>/LibrarySearchServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibrarySearchServlet</servlet-name>
+        <url-pattern>/LibrarySearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibrarySearchServletTermType</servlet-name>
+        <url-pattern>/LibrarySearchServletTermType</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LibrarySearchServletTermTypeFilter</servlet-name>
+        <url-pattern>/LibrarySearchServletTermTypeFilter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

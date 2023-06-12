@@ -12,8 +12,6 @@ import models.Client;
  */
 public interface ClientDAOInterface {
     
-
-
     void addClient(Client client);
     
     void updateClient(Client client);
@@ -22,7 +20,6 @@ public interface ClientDAOInterface {
     
     Client getClientById(int clientId);
    
-    
     List<Client> getAllClients();
 }
 
