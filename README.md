@@ -10,7 +10,7 @@ You are asked to create a dynamic website that includes:
 * Etc.
 
 General instructions:
-* The presentation aspect is important.
+* The presentation aspect is important.(Bootstrap suffices)
 * The MVC model must be respected.
 * Web pages that are not directly accessible to the user must be protected (by saving them in WEB-INF).
 * Separation of different types of files (js, css, jsp, html, images) into different folders.
