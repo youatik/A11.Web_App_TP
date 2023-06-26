@@ -18,3 +18,24 @@ General instructions:
 * For data access, use a MySQL database.
 * This will facilitate the grading process (I don't want to configure another DBMS). You should submit the physical schema of your database.
 * The application must be internationalized (at least 2 user-selectable languages available on different pages).
+
+What is currently done;
+- A search page with and without filters,
+- A results page with a table of books 
+- A page that display all books 
+- A few other pages testing displaying of clients and other features
+- A MySQL schema (user=‘root’ password=’’)
+- The creation and insertion script
+
+What is currently needed;
+- Login page
+- Account page
+    - See user details
+    - View orders for the account
+- View shopping cart
+    - Check out cart
+- Add to cart button in search page
+- Internationalization in i18n for jsp pages, with use of properties files and resource bundle
+- Internationalization in French and English with buttons to toggle (use google translate)
+
+No CSS needed, only HTML at this point.
