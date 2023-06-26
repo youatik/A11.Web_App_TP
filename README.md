@@ -134,15 +134,5 @@ package "jdbc" {
 }
 @enduml
 
-@startuml
 
-hide circle
-hide empty attributes
-
-package "jdbc" {
-  class client as "Client" << (T,#FFAAAA) >> {
-    <u>clientId</u> INT
-    - firstName: VARCHAR(50)
-    - lastName: VARCHAR(50)
-    - email: VARCHAR(100)
    </g></svg>
